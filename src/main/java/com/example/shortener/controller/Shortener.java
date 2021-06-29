@@ -1,5 +1,6 @@
 package com.example.shortener.controller;
 
+import com.example.shortener.Entity.ShortenerEntity;
 import com.example.shortener.service.ShortenerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import static com.example.shortener.Entity.ShortenerEntity.buildShortener;
 
@@ -21,10 +21,10 @@ public class Shortener {
     @Autowired
     private ShortenerService shortenerService;
 
-    @GetMapping(value = "/get", produces = "application/json")
-    public void get(HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("https://www.netflix.com");
-    }
+//    @GetMapping(value = "/get", produces = "application/json")
+//    public void get(HttpServletResponse resp) throws IOException {
+//        resp.sendRedirect("https://www.netflix.com");
+//    }
 
     @GetMapping(value = "/generate", produces = "application/json")
     public ResponseEntity<?> generate(@RequestParam String url) {
@@ -33,6 +33,11 @@ public class Shortener {
         } else {
             return ResponseEntity.badRequest().body("Please enter valid url");
         }
+    }
+
+    @GetMapping(value = "/get", produces = "application/json")
+    public ResponseEntity<List<ShortenerEntity>> get() {
+        return ResponseEntity.ok(shortenerService.get());
     }
 
     private boolean isValidUrl(String url) {
@@ -47,4 +52,6 @@ public class Shortener {
 
 
     }
+
+
 }

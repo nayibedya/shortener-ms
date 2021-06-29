@@ -21,8 +21,14 @@ public class ShortenerServiceTest {
     private ShortenerRepositoryAdapter shortenerRepositoryAdapter;
 
     @Test
-    void should_call_dao_method_once_per_method_call() {
+    void should_call_dao_method_once_per_method_call_save() {
         shortenerService.save(any());
         verify(shortenerRepositoryAdapter, times(1)).save(any());
+    }
+
+    @Test
+    void should_call_dao_method_once_per_method_call_get() {
+        shortenerService.get();
+        verify(shortenerRepositoryAdapter, times(1)).get();
     }
 }

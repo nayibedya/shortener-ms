@@ -1,0 +1,40 @@
+package com.example.shortener.IntegrationTest;
+
+import com.example.shortener.AutoConfigureTest;
+import com.example.shortener.util.TestUtils;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
+@AutoConfigureTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class ShortenerControllerITTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    void generate_api_it_test() throws Exception {
+        var generateRequest = get("/generate?url=" + TestUtils.URL);
+        ResultActions response = mockMvc.perform(generateRequest);
+
+        response.andExpect(jsonPath("$.actualUrl", is(TestUtils.URL)))
+                .andExpect(jsonPath("$.counter", is(0)));
+    }
+
+    @Test
+    void get_api_it_test() throws Exception {
+        var getRequest = get("/get");
+        ResultActions response = mockMvc.perform(getRequest);
+
+        response.andExpect(status().isOk());
+    }
+}

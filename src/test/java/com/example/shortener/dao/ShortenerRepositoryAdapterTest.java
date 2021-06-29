@@ -20,8 +20,14 @@ public class ShortenerRepositoryAdapterTest {
     private ShortenerJpaRepository shortenerJpaRepository;
 
     @Test
-    void should_instantiate_jpa_method_once_per_method_call () {
+    void should_instantiate_jpa_method_once_per_method_call_save () {
         shortenerRepositoryAdapter.save(any());
         verify(shortenerJpaRepository, times(1)).save(any());
+    }
+
+    @Test
+    void should_instantiate_jpa_method_once_per_method_call_get () {
+        shortenerRepositoryAdapter.get();
+        verify(shortenerJpaRepository, times(1)).findAll();
     }
 }
