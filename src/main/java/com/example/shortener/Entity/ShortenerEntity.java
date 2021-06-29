@@ -36,6 +36,14 @@ public class ShortenerEntity {
                 .build();
     }
 
+    public ShortenerEntity buildShortenerSave() {
+        return ShortenerEntity.builder()
+                .shortenerKey(this.shortenerKey)
+                .actualUrl(this.actualUrl)
+                .counter(this.counter + 1)
+                .build();
+    }
+
     public static String randomAlphaNumeric(int count) {
         final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder builder = new StringBuilder();

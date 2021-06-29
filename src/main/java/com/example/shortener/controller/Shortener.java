@@ -52,6 +52,8 @@ public class Shortener {
             log.info("key {} is present", urlKey);
             resp.sendRedirect(entity.get().getActualUrl());
             log.info("Successfully Redirected to URL: {} ", entity.get().getActualUrl());
+            shortenerService.save(entity.get().buildShortenerSave());
+            log.info("Number of times the url used : {}", entity.get().getCounter());
         } else {
             log.warn("shortener key {} not present", urlKey);
         }
