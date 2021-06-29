@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static com.example.shortener.util.TestUtils.KEY;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -20,14 +21,20 @@ public class ShortenerRepositoryAdapterTest {
     private ShortenerJpaRepository shortenerJpaRepository;
 
     @Test
-    void should_instantiate_jpa_method_once_per_method_call_save () {
+    void should_instantiate_jpa_method_once_per_method_call_save() {
         shortenerRepositoryAdapter.save(any());
         verify(shortenerJpaRepository, times(1)).save(any());
     }
 
     @Test
-    void should_instantiate_jpa_method_once_per_method_call_get () {
-        shortenerRepositoryAdapter.get();
+    void should_instantiate_jpa_method_once_per_method_call_getAll() {
+        shortenerRepositoryAdapter.getAll();
         verify(shortenerJpaRepository, times(1)).findAll();
+    }
+
+    @Test
+    void should_instantiate_jpa_method_once_per_method_call_get() {
+        shortenerRepositoryAdapter.get(KEY);
+        verify(shortenerJpaRepository, times(1)).findById(any());
     }
 }

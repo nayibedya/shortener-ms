@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShortenerService {
@@ -17,7 +18,11 @@ public class ShortenerService {
         return shortenerRepositoryAdapter.save(shortenerEntity);
     }
 
-    public List<ShortenerEntity> get() {
-        return shortenerRepositoryAdapter.get();
+    public List<ShortenerEntity> getAll() {
+        return shortenerRepositoryAdapter.getAll();
+    }
+
+    public Optional<ShortenerEntity> get(String urlKey) {
+        return shortenerRepositoryAdapter.get(urlKey);
     }
 }

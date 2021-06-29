@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static com.example.shortener.util.TestUtils.KEY;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -27,8 +28,14 @@ public class ShortenerServiceTest {
     }
 
     @Test
+    void should_call_dao_method_once_per_method_call_getAll() {
+        shortenerService.getAll();
+        verify(shortenerRepositoryAdapter, times(1)).getAll();
+    }
+
+    @Test
     void should_call_dao_method_once_per_method_call_get() {
-        shortenerService.get();
-        verify(shortenerRepositoryAdapter, times(1)).get();
+        shortenerService.get(KEY);
+        verify(shortenerRepositoryAdapter, times(1)).get(any());
     }
 }

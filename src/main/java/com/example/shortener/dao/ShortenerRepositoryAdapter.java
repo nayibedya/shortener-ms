@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ShortenerRepositoryAdapter {
@@ -16,7 +17,11 @@ public class ShortenerRepositoryAdapter {
         return shortenerJpaRepository.save(shortenerEntity);
     }
 
-    public List<ShortenerEntity> get() {
+    public List<ShortenerEntity> getAll() {
         return shortenerJpaRepository.findAll();
+    }
+
+    public Optional<ShortenerEntity> get(String urlKey) {
+        return shortenerJpaRepository.findById(urlKey);
     }
 }
