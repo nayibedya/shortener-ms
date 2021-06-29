@@ -1,4 +1,29 @@
-
-name: shortener-ms
 server:
   port: 8085
+  ssl.enabled: false
+  contextPath: /
+
+spring:
+  application:
+    name: shortener-app
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+  logging:
+    level:
+      root: INFO
+      org.springframework: INFO
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:shortnerdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: sa
