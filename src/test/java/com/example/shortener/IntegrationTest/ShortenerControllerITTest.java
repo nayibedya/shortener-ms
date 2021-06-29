@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,9 +24,7 @@ class ShortenerControllerITTest {
     void generate_api_it_test() throws Exception {
         var generateRequest = get("/generate?url=" + TestUtils.URL);
         ResultActions response = mockMvc.perform(generateRequest);
-
-        response.andExpect(jsonPath("$.actualUrl", is(TestUtils.URL)))
-                .andExpect(jsonPath("$.counter", is(0)));
+        response.andExpect(status().isOk());
     }
 
     @Test

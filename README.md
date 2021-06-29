@@ -6,7 +6,16 @@ Micro-service for shortener application
 - h2 database
 - maven
 
-To Start the Application Run ShortenerApplication.java
+##RUN Steps
+###locally
+- To Start the Application Run ShortenerApplication.java.
+- Application will be server at port http://localhost:8085.
+- To check if the application has started successfully check http://localhost:8085/actuator/health
+- If the response is "UP" then application is started.
+
+###Using Docker
+- RUN mvn clean install.
+- Run the docker file 
 
 ##API Lists
 
@@ -25,4 +34,4 @@ the url has been used.
 
 Packaged jar will be available in target folder under root directory.
 
- 
+
