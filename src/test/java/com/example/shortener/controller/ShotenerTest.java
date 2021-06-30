@@ -57,7 +57,7 @@ public class ShotenerTest {
         ResponseEntity<?> responseEntity = shortener.generate("http:// www.short.com");
         verify(shortenerService, times(0)).save(any());
         assertThat(responseEntity.getBody()).isEqualTo("Please enter valid url");
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
