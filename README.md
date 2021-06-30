@@ -7,6 +7,12 @@ Micro-service for shortener application
 - maven
 
 ##RUN Steps
+
+###Using Docker
+- docker-compose up -> to start the application
+- docker-compose down -> to stop the application
+- application will be server at http://localhost:8085
+
 ###locally
 - To Start the Application Run ShortenerApplication.java.
 - Application will be server at port http://localhost:8085.
@@ -14,9 +20,7 @@ Micro-service for shortener application
 - If the response is "UP" then application is started.
 - To change the port number go to application.yml 
 
-###Using Docker
-- docker-compose up -> to start the application
-- docker-compose down -> to stop the application
+
 
 ##API Lists
 
