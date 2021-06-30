@@ -20,7 +20,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static com.example.shortener.util.TestUtils.KEY;
+import static com.example.shortener.util.TestUtils.REQUEST_URL;
 import static com.example.shortener.util.TestUtils.URL;
+import static com.example.shortener.util.TestUtils.buildGenerateRequest;
 import static com.example.shortener.util.TestUtils.buildListShortenEntity;
 import static com.example.shortener.util.TestUtils.buildShortenEntity;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,7 +48,7 @@ public class ShotenerTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         when(shortenerService.save(any())).thenReturn(buildShortenEntity(URL));
-        var responseEntity = shortener.generate("http://www.short.com");
+        var responseEntity = shortener.generate(buildGenerateRequest(REQUEST_URL));
         verify(shortenerService, times(1)).save(any());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isEqualTo("http://localhost/CCF54R");
@@ -54,7 +56,7 @@ public class ShotenerTest {
 
     @Test
     void should_validate_url_and_return_response_if_malformedurl_passed() {
-        ResponseEntity<?> responseEntity = shortener.generate("http:// www.short.com");
+        ResponseEntity<?> responseEntity = shortener.generate(buildGenerateRequest("http://local host"));
         verify(shortenerService, times(0)).save(any());
         assertThat(responseEntity.getBody()).isEqualTo("Please enter valid url");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);

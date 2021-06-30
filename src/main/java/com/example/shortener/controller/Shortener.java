@@ -1,6 +1,7 @@
 package com.example.shortener.controller;
 
 import com.example.shortener.Entity.ShortenerEntity;
+import com.example.shortener.RequestEntity.GenerateRequest;
 import com.example.shortener.service.ShortenerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,15 +31,15 @@ public class Shortener {
     private ShortenerService shortenerService;
 
 
-    @GetMapping(value = "/generate", produces = "application/json")
-    public ResponseEntity<String> generate(@RequestParam String url) {
-        if (isValidUrl(url)) {
+    @PostMapping(value = "/generate", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<String> generate(@RequestBody GenerateRequest generateRequest) {
+        if (isValidUrl(generateRequest.getUrl())) {
             log.info("generating shortened URL");
-            ShortenerEntity shortenerEntity = shortenerService.save(buildShortener(url));
+            ShortenerEntity shortenerEntity = shortenerService.save(buildShortener(generateRequest.getUrl()));
             String shortenedUrl = ServletUriComponentsBuilder.fromCurrentContextPath().path(shortenerEntity.getShortenerKey()).toUriString();
             return ResponseEntity.ok(shortenedUrl);
         } else {
-            log.warn("Entered Malformed URL: {}", url);
+            log.warn("Entered Malformed URL: {}", generateRequest.getUrl());
             return ResponseEntity.ok("Please enter valid url");
         }
     }
