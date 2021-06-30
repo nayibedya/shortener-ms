@@ -12,6 +12,7 @@ Micro-service for shortener application
 - Application will be server at port http://localhost:8085.
 - To check if the application has started successfully check http://localhost:8085/actuator/health
 - If the response is "UP" then application is started.
+- To change the port number go to application.yml 
 
 ###Using Docker
 - RUN mvn clean install.
