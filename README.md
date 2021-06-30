@@ -15,8 +15,8 @@ Micro-service for shortener application
 - To change the port number go to application.yml 
 
 ###Using Docker
-- RUN mvn clean install.
-- Run the docker file 
+- docker-compose up -> to start the application
+- docker-compose down -> to stop the application
 
 ##API Lists
 

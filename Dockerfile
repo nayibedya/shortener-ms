@@ -1,4 +1,4 @@
-FROM  openjdk:11-jdk
+FROM  amazoncorretto:11-alpine-jdk
 WORKDIR /app
-COPY ./target/shortener-0.0.1-SNAPSHOT.jar ./
+COPY ./jarFile/shortener-0.0.1-SNAPSHOT.jar ./
 ENTRYPOINT ["java","-jar","shortener-0.0.1-SNAPSHOT.jar"]
