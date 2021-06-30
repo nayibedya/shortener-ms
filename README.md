@@ -9,9 +9,10 @@ Micro-service for shortener application
 ##RUN Steps
 
 ###Using Docker
+- pre-requisite : Docker engine should be installed on the machine
 - docker-compose up -> to start the application
 - docker-compose down -> to stop the application
-- application will be server at http://localhost:8085
+- application will be served at http://localhost:8085
 
 ###locally
 - To Start the Application Run ShortenerApplication.java.
